@@ -9,7 +9,7 @@ This is a fork from [AFNetworking / AFOAuth2Client](http://github.com/AFNetworki
 NSURL *url = [NSURL URLWithString:@"http://example.com/"];
 AFOAuth2Client *oauthClient = [AFOAuth2Client clientWithBaseURL:url clientID:kClientID secret:kClientSecret];
 
-[oauthClient authenticateUsingOAuthWithURLString:[NSString stringWithFormat:@"%@/oauth/v2/token",[[[NSBundle mainBundle] infoDictionary]objectForKey:@"BaseURL"]] 
+[oauthClient authenticateUsingOAuthWithURLString:@"oauth/v2/token" 
 									username:@"username" 
 									password:@"password" 
 									scope:@"scope" 

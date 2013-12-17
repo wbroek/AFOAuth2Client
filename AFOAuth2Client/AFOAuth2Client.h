@@ -107,7 +107,7 @@
                                    password:(NSString *)password
                                       scope:(NSString *)scope
                                     success:(void (^)(AFOAuthCredential *credential))success
-                                    failure:(void (^)(NSError *error))failure;
+                                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
  Creates and enqueues an `AFHTTPRequestOperation` to authenticate against the server with a designated scope.
@@ -120,7 +120,7 @@
 - (void)authenticateUsingOAuthWithURLString:(NSString *)urlString
                                       scope:(NSString *)scope
                                     success:(void (^)(AFOAuthCredential *credential))success
-                                    failure:(void (^)(NSError *error))failure;
+                                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
  Creates and enqueues an `AFHTTPRequestOperation` to authenticate against the server using the specified refresh token.
@@ -133,7 +133,7 @@
 - (void)authenticateUsingOAuthWithURLString:(NSString *)urlString
                                refreshToken:(NSString *)refreshToken
                                     success:(void (^)(AFOAuthCredential *credential))success
-                                    failure:(void (^)(NSError *error))failure;
+                                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
  Creates and enqueues an `AFHTTPRequestOperation` to authenticate against the server with an authorization code, redirecting to a specified URI upon successful authentication.
@@ -148,7 +148,7 @@
                                        code:(NSString *)code
                                 redirectURI:(NSString *)uri
                                     success:(void (^)(AFOAuthCredential *credential))success
-                                    failure:(void (^)(NSError *error))failure;
+                                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
  Creates and enqueues an `AFHTTPRequestOperation` to authenticate against the server with the specified parameters.
@@ -161,7 +161,7 @@
 - (void)authenticateUsingOAuthWithURLString:(NSString *)urlString
                                  parameters:(NSDictionary *)parameters
                                     success:(void (^)(AFOAuthCredential *credential))success
-                                    failure:(void (^)(NSError *error))failure;
+                                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end
 
@@ -210,24 +210,26 @@
 ///--------------------------------------------
 
 /**
- Create an OAuth credential from a token string, with a specified type.
+ Create an OAuth credential from a token string, with a specified type and specified expiration.
  
  @param token The OAuth token string.
  @param type The OAuth token type.
  */
 + (instancetype)credentialWithOAuthToken:(NSString *)token
                                tokenType:(NSString *)type
-								response:(NSDictionary*)response;
+								response:(NSDictionary*)response
+                                expiration:(NSDate *)expiration;
 
 /**
- Initialize an OAuth credential from a token string, with a specified type.
+ Initialize an OAuth credential from a token string, with a specified type and specified expiration.
  
  @param token The OAuth token string.
  @param type The OAuth token type.
  */
 - (id)initWithOAuthToken:(NSString *)token
                tokenType:(NSString *)type
-				response:(NSDictionary*)response;
+				response:(NSDictionary*)response
+                 expiration:(NSDate *)expiration;
 
 ///----------------------------
 /// @name Setting Refresh Token
